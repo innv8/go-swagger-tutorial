@@ -1,0 +1,7 @@
+.vscode
+.idea
+.fleet
+tmp
+build
+go-swagger-tutorial
+*log
