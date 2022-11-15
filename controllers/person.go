@@ -10,13 +10,17 @@ import (
 	"net/http"
 )
 
+// ErrorResponse model info
+// @Description The generic error messages for all endpoints
 type ErrorResponse struct {
-	Message string `json:"message"`
+	Message string `json:"message" example:"Your account was rejected"`
 }
 
+// AddPersonPayload is the request to add a new person
+// @Description Payload used to create new person
 type AddPersonPayload struct {
-	Name string `json:"name"`
-	Age  uint   `json:"age"`
+	Name string `json:"name" example:"John Doe"`
+	Age  uint   `json:"age" example:"34"`
 }
 
 func (p *AddPersonPayload) Validate() error {
@@ -29,10 +33,22 @@ func (p *AddPersonPayload) Validate() error {
 	return nil
 }
 
+// AddPersonResponse
+// @Description the successful response of the created user
 type AddPersonResponse struct {
-	Id int `json:"id"`
+	Id int `json:"id" example:"3"`
 }
 
+// AddPerson godoc
+// @Summary		Adds a new person
+// @Description	Make a POST request to /persons to create a new person
+// @Tags 		person
+// @Accept 		json
+// @Produce 	json
+// @Param		data	body	AddPersonPayload true	"The person input"
+// @Success 	200		{object} AddPersonResponse
+// @Failure		400		{object} ErrorResponse
+// @Router		/persons	[post]
 func (b *Base) AddPerson(w http.ResponseWriter, r *http.Request) {
 	var data AddPersonPayload
 	var response AddPersonResponse

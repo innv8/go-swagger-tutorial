@@ -6,3 +6,4 @@ build
 go-swagger-tutorial
 *log
 gen
+docs

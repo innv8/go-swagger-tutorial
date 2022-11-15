@@ -1,0 +1,96 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is just a sample server",
+        "title": "Swagger Example API",
+        "contact": {
+            "name": "Rapando",
+            "url": "https://innv8.ke"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "https://gaming.innv8.ke/license"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:5000",
+    "basePath": "/",
+    "paths": {
+        "/persons": {
+            "post": {
+                "description": "Make a POST request to /persons to create a new person",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "person"
+                ],
+                "summary": "Adds a new person",
+                "parameters": [
+                    {
+                        "description": "The person input",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controllers.AddPersonPayload"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.AddPersonResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/controllers.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "controllers.AddPersonPayload": {
+            "description": "Payload used to create new person",
+            "type": "object",
+            "properties": {
+                "age": {
+                    "type": "integer",
+                    "example": 34
+                },
+                "name": {
+                    "type": "string",
+                    "example": "John Doe"
+                }
+            }
+        },
+        "controllers.AddPersonResponse": {
+            "description": "the successful response of the created user",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "example": 3
+                }
+            }
+        },
+        "controllers.ErrorResponse": {
+            "description": "The generic error messages for all endpoints",
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string",
+                    "example": "Your account was rejected"
+                }
+            }
+        }
+    }
+}

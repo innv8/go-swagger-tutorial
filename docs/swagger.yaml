@@ -1,0 +1,65 @@
+basePath: /
+definitions:
+  controllers.AddPersonPayload:
+    description: Payload used to create new person
+    properties:
+      age:
+        example: 34
+        type: integer
+      name:
+        example: John Doe
+        type: string
+    type: object
+  controllers.AddPersonResponse:
+    description: the successful response of the created user
+    properties:
+      id:
+        example: 3
+        type: integer
+    type: object
+  controllers.ErrorResponse:
+    description: The generic error messages for all endpoints
+    properties:
+      message:
+        example: Your account was rejected
+        type: string
+    type: object
+host: localhost:5000
+info:
+  contact:
+    name: Rapando
+    url: https://innv8.ke
+  description: This is just a sample server
+  license:
+    name: Apache 2.0
+    url: https://gaming.innv8.ke/license
+  title: Swagger Example API
+  version: "1.0"
+paths:
+  /persons:
+    post:
+      consumes:
+      - application/json
+      description: Make a POST request to /persons to create a new person
+      parameters:
+      - description: The person input
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.AddPersonPayload'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controllers.AddPersonResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/controllers.ErrorResponse'
+      summary: Adds a new person
+      tags:
+      - person
+swagger: "2.0"
